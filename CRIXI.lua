@@ -218,6 +218,7 @@ MiscTab:Button({
     end,
 })
 
+local currentSpin = 0
 RunService:BindToRenderStep("ZaeSpectateFinal", Enum.RenderPriority.Camera.Value + 1, function(dt)
     if FPSDisplayEnabled then fpsLabel.Text = "FPS : [" .. math.floor(1 / dt) .. "]" end
     
@@ -235,6 +236,7 @@ RunService:BindToRenderStep("ZaeSpectateFinal", Enum.RenderPriority.Camera.Value
 
     if AntiKnockback and LocalPlayer.Character then LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,0,0) end
     
+    -- LOGIC AUTO FARM KILL
     if AutoFarmEnabled and LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         local isWhitelisted = WhitelistEnabled and Target and Target.Name == WhitelistedPlayer
         if not Target or not Target.Parent or not Target.Character or not Target.Character:FindFirstChild("Humanoid") or Target.Character.Humanoid.Health <= 0 or isWhitelisted then
@@ -265,6 +267,7 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
+-- LOGIC AUTO SKILL
 task.spawn(function()
     while true do
         if AutoSkillEnabled then
